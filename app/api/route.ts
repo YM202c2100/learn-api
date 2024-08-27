@@ -9,6 +9,10 @@ const GET = async (request: NextRequest)=>{
             "ContentType":"application/json"
         }
     })
+    if(!res.ok){
+        throw new Error(`レスポンスステータス：${res.status}`)
+    }
+
     const data = await res.json()
 
     return Response.json({data})
