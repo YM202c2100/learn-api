@@ -12,11 +12,20 @@ export const postAction = async (inputData:FormData)=>{
         name:name
     }
 
-    fetch("http://localhost:3001/todo",{
-        method:"POST",
-        headers:{
-            "Content-Type":"application/json"
-        },
-        body: JSON.stringify(formData)
-    })
+    try {
+        const res = await fetch("http://localhost:3001/todo",{
+            method:"POST",
+            headers:{
+                "Content-Type":"application/json"
+            },
+            body: JSON.stringify(formData)
+        })
+
+        if(!res.ok){
+            throw new Error(`エラーステータス：${res.status}`)
+        }
+
+    } catch (error) {
+        console.error(error);
+    }
 }
