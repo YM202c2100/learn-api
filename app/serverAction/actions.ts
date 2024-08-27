@@ -14,6 +14,9 @@ export const postAction = async (inputData:FormData)=>{
 
     fetch("http://localhost:3001/todo",{
         method:"POST",
+        headers:{
+            "Content-Type":"application/json"
+        },
         body: JSON.stringify(formData)
     })
 }
