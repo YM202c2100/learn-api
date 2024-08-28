@@ -1,7 +1,21 @@
 "use client"
 
-import { useFormState } from "react-dom";
+import { useFormState, useFormStatus } from "react-dom";
 import { postAction } from "./actions";
+
+
+const SubmitButton:React.FC = ()=>{
+    const {pending} = useFormStatus()
+    return(
+        <button 
+            type="submit"
+            disabled={pending}
+            className="border border-black"
+        >
+            {pending ? "送信中…":"送信する"}
+        </button>
+    )
+} 
 
 export type FormState = {
     values?:{
@@ -23,7 +37,7 @@ export default function page(){
                 <p>{formState.errors?.id && formState.errors.id}</p>
                 <input type="text" name="name" placeholder="名前を入力" className="border border-black"/><br />
                 <p>{formState.errors?.name && formState.errors.name}</p>
-                <button type="submit">送信</button>
+                <SubmitButton/>
             </form>
         </div>
     )
