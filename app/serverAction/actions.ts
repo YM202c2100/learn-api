@@ -1,5 +1,7 @@
 "use server"
 
+import { redirect } from "next/navigation"
+
 export const postAction = async (inputData:FormData)=>{
     const id = inputData.get("id")
     const name = inputData.get("name")
@@ -28,4 +30,5 @@ export const postAction = async (inputData:FormData)=>{
     } catch (error) {
         console.error(error);
     }
+    redirect("/serverAction/complete")
 }
