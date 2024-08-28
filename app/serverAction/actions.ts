@@ -1,12 +1,16 @@
 "use server"
 
 import { redirect } from "next/navigation"
+import { FormState } from "./page"
 
-export const postAction = async (inputData:FormData)=>{
+export const postAction = async (prev:FormState, inputData:FormData)=>{
     const id = inputData.get("id")
+    if(!id){
+        return {errors:{id:"idが不足しています"}}
+    }
     const name = inputData.get("name")
-    if(!id || !name){
-        return
+    if(!name){
+        return {errors:{name:"nameが不足しています"}}
     }
 
     const formData = {
