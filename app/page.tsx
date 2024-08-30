@@ -1,37 +1,11 @@
-"use client"
+import Link from "next/link";
 
-import { useState } from "react"
-
-type PokeJson = {
-  data:{name:string}
-}
-
-export default function Home() {
-  const [pokeData, setPokeData] = useState<PokeJson>()
-  const [pokeId, setPokeId] = useState<string>("")
-
-  const submitHandler = async()=>{
-    const res = await fetch(`/api?id=${pokeId}`)
-    const data = await res.json()
-    setPokeData(data)
-  }
-
-  return (<>
-    <form>
-      <input
-        type="number" min={1} value={pokeId}
-        onChange={(e)=>{
-          if(parseInt(e.target.value) > 0){
-            setPokeId(e.target.value)
-          }
-        }}
-        className="border"
-      />
-      <input type="button" onClick={submitHandler} className="border p-1" value={"送信"}/>
-    </form>
-
-    <div>
-      {pokeData && pokeData.data.name}
-    </div>
-  </>);
+export default function Home(){
+  return(
+    <ul className="space-y-8 underline">
+      <li><Link href={"/apiRoutes"}>API Routes</Link></li>
+      <li><Link href={"/serverAction"}>Server Actions</Link></li>
+      <li><Link href={"/ReactHookForm"}>React Hook Form</Link></li>
+    </ul>
+  )
 }
