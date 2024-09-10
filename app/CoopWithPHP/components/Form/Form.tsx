@@ -1,7 +1,7 @@
 const Form:React.FC = ()=>{
   return(
     <div>
-      <form action="" method="post" className="ml-4">
+      <form action="/CoopWithPHP/api/todo" method="post" className="ml-4">
         <div className="mb-4">
           <p>タイトル</p>
           <input type="text" name="title" required className="border border-black"/>
