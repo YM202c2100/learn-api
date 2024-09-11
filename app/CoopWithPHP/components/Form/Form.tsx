@@ -1,9 +1,10 @@
 "use client"
 
-import { FormEvent } from "react"
+import { FormEvent, useState } from "react"
 import { throwErrorWithStatus } from "../../api/helper";
 
 const Form:React.FC = ()=>{
+  const [isSuccess, setIsSuccess] = useState<boolean>(false);
   
   async function submitHandler(e:FormEvent<HTMLFormElement>){
     e.preventDefault();
@@ -18,10 +19,11 @@ const Form:React.FC = ()=>{
       if(!res.ok){
         throwErrorWithStatus(res)
       }
-  
-      const data = await res.json()
-      console.log(data);
+
+      setIsSuccess(true)
+
     } catch (error) {
+      setIsSuccess(false)
       console.error(error)
     }
   }
@@ -39,6 +41,10 @@ const Form:React.FC = ()=>{
         </div>
         <button type="submit" className="border border-black">送信</button>
       </form>
+
+      <div>
+        {isSuccess && "追加完了-データベースを確認してください"}
+      </div>
     </div>
   )
 }

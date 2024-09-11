@@ -13,6 +13,5 @@ export async function POST(request: Request){
     throwErrorWithStatus(res)
   }
 
-  const data = await res.json()
-  return NextResponse.json(data);
+  return new NextResponse;
 }
