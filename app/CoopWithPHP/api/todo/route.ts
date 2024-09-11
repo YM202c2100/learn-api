@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server"
 import { ROOT_PATH } from "../config"
+import { throwErrorWithStatus } from "../helper"
 
 export async function POST(request: Request){
   const formData = await request.formData()
@@ -9,14 +10,7 @@ export async function POST(request: Request){
   })
 
   if(!res.ok){
-    switch (res.status){
-      case 404:
-        throw new Error('404 : Resource Not Found')
-      case 500:
-        throw new Error('500 : Server Internal Error')
-      default:
-        throw new Error(`Error : status:${res.status}`)
-    }
+    throwErrorWithStatus(res)
   }
 
   const data = await res.json()
