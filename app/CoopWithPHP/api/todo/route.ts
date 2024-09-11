@@ -1,8 +1,24 @@
+import { NextResponse } from "next/server"
+import { ROOT_PATH } from "../config"
+
 export async function POST(request: Request){
-  const reqForm = await request.formData()
-  const title = reqForm.get('title')
-  const body = reqForm.get('body')
-  return Response.json({title:title, body:body});
-  
-  //戻り値は？
+  const formData = await request.formData()
+  const res = await fetch(ROOT_PATH+"todo/index.php",{
+    method:"POST",
+    body:formData
+  })
+
+  if(!res.ok){
+    switch (res.status){
+      case 404:
+        throw new Error('404 : Resource Not Found')
+      case 500:
+        throw new Error('500 : Server Internal Error')
+      default:
+        throw new Error(`Error : status:${res.status}`)
+    }
+  }
+
+  const data = await res.json()
+  return NextResponse.json(data);
 }
