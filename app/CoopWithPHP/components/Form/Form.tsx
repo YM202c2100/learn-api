@@ -1,7 +1,34 @@
+"use client"
+
+import { FormEvent } from "react"
+import { throwErrorWithStatus } from "../../api/helper";
+
 const Form:React.FC = ()=>{
+  
+  async function submitHandler(e:FormEvent<HTMLFormElement>){
+    e.preventDefault();
+    const formData = new FormData(e.currentTarget)
+    
+    try {
+      const res = await fetch("CoopWithPHP/api/todo",{
+        method: "POST",
+        body: formData
+      })
+  
+      if(!res.ok){
+        throwErrorWithStatus(res)
+      }
+  
+      const data = await res.json()
+      console.log(data);
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
   return(
     <div>
-      <form action="/CoopWithPHP/api/todo" method="post" className="ml-4">
+      <form onSubmit={submitHandler} method="post" className="ml-4">
         <div className="mb-4">
           <p>タイトル</p>
           <input type="text" name="title" required className="border border-black"/>
