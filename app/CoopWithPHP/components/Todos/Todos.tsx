@@ -16,7 +16,7 @@ const Todos:React.FC = ()=>{
   return(
     <div>
       <Form setTodos={setTodos}/>
-      <List todos={todos}/>
+      <List todos={todos} setTodos={setTodos}/>
     </div>
   )
 }

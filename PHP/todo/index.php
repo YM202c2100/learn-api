@@ -7,6 +7,19 @@ header("Access-Control-Allow-Methods: POST, GET");
 header("Access-Control-Allow-Headers: Content-Type");
 header('Content-Type: multipart/form-data');
 
+if($_SERVER['REQUEST_METHOD'] === "GET"){
+  try {
+    $db = new DataBaseConnection();
+  
+    $sql = 'SELECT id, title, body, completed from todos';
+    $fetched_data = $db->selectAll($sql,[]);
+  
+    echo json_encode($fetched_data);
+  } catch (\Throwable $th) {
+    http_response_code(500);
+  }
+}
+
 if($_SERVER['REQUEST_METHOD'] === 'POST'){
   $title = $_POST['title'] ?? null;
   $body = $_POST['body'] ?? null;

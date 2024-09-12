@@ -38,6 +38,16 @@ class DataBaseConnection{
     return $data;
   }
 
+  public function selectAll($sql, $valueMap){
+    $pst = $this->conn->prepare($sql);
+    if(isset($valueMap)){
+      DataBaseConnection::bindValues($pst, $valueMap);
+    }
+    $pst->execute();
+    $data = $pst->fetchAll();
+    return $data;
+  }
+
   public static function bindValues($preparedStmt, $valueMap){
     foreach($valueMap as $placeHolder => $value){
       $preparedStmt->bindValue($placeHolder, $value);
