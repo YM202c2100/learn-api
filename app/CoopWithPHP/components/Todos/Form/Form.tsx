@@ -1,12 +1,14 @@
-import { FormEvent, useState } from "react"
+import { Dispatch, FormEvent, useState } from "react"
 import { throwErrorWithStatus } from "@/app/CoopWithPHP/api/helper";
+import type { Todo } from "../Todos";
 
-const Form:React.FC = ()=>{
+const Form:React.FC<{setTodos:Dispatch<React.SetStateAction<Todo[]>>}> = ({setTodos})=>{
   async function submitHandler(e:FormEvent<HTMLFormElement>){
     e.preventDefault();
     const formData = new FormData(e.currentTarget)
     
     try {
+      //DBに新規Todoの情報を追加
       const res = await fetch("CoopWithPHP/api/todo",{
         method: "POST",
         body: formData
@@ -15,6 +17,10 @@ const Form:React.FC = ()=>{
       if(!res.ok){
         throwErrorWithStatus(res)
       }
+
+      const newTodo = await res.json()
+
+      setTodos(todos => [...todos, newTodo])
 
     } catch (error) {
       console.error(error)

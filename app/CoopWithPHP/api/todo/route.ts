@@ -13,5 +13,7 @@ export async function POST(request: Request){
     throwErrorWithStatus(res)
   }
 
-  return new NextResponse;
+  const json = await res.json();
+
+  return NextResponse.json(json);
 }
