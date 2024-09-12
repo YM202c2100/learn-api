@@ -11,7 +11,7 @@ const List:React.FC<{todos: Todo[]}> = ({todos})=>{
           </div>
           <div>
             <span>追記:</span>
-            <span>{todo.title}</span>
+            <span>{todo.body}</span>
           </div>
         </li>
       ))}
