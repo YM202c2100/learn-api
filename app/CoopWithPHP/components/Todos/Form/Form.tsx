@@ -2,8 +2,6 @@ import { FormEvent, useState } from "react"
 import { throwErrorWithStatus } from "@/app/CoopWithPHP/api/helper";
 
 const Form:React.FC = ()=>{
-  const [isSuccess, setIsSuccess] = useState<boolean>(false);
-  
   async function submitHandler(e:FormEvent<HTMLFormElement>){
     e.preventDefault();
     const formData = new FormData(e.currentTarget)
@@ -18,10 +16,7 @@ const Form:React.FC = ()=>{
         throwErrorWithStatus(res)
       }
 
-      setIsSuccess(true)
-
     } catch (error) {
-      setIsSuccess(false)
       console.error(error)
     }
   }
@@ -39,10 +34,6 @@ const Form:React.FC = ()=>{
         </div>
         <button type="submit" className="border border-black">送信</button>
       </form>
-
-      <div>
-        {isSuccess && "追加完了-データベースを確認してください"}
-      </div>
     </div>
   )
 }
