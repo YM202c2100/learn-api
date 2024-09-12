@@ -1,4 +1,4 @@
-import { Form } from "./components/Form/Form";
+import { Form } from "./components/Todos/Form/Form";
 
 
 export default function page(){

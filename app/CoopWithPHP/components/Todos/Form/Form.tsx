@@ -1,7 +1,7 @@
 "use client"
 
 import { FormEvent, useState } from "react"
-import { throwErrorWithStatus } from "../../api/helper";
+import { throwErrorWithStatus } from "@/app/CoopWithPHP/api/helper";
 
 const Form:React.FC = ()=>{
   const [isSuccess, setIsSuccess] = useState<boolean>(false);
