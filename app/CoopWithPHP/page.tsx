@@ -1,10 +1,10 @@
-import { Form } from "./components/Todos/Form/Form";
+import Todos from "./components/Todos/Todos";
 
 
 export default function page(){
   return(
     <main>
-      <Form/>
+      <Todos/>
     </main>
   )
 }
