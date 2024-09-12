@@ -9,6 +9,7 @@ const Form:React.FC<{setTodos:Dispatch<React.SetStateAction<Todo[]>>}> = ({setTo
     
     try {
       //DBに新規Todoの情報を追加
+      //戻り値はDBに追加した新規Todoのレコード
       const res = await fetch("CoopWithPHP/api/todo",{
         method: "POST",
         body: formData
